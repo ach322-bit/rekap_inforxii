@@ -1,0 +1,833 @@
+<!doctype html>
+<html lang="id">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nilai INFORMATIKA Kelas XII</title>
+  <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            display: block;
+            border-radius: 50%;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .title {
+            color: #2d3748;
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.2rem;
+            margin: 0;
+        }
+
+        .controls {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            min-width: 250px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-btn {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(245, 87, 108, 0.4);
+        }
+
+        .filter-select {
+            padding: 12px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .data-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+
+        .student-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+        }
+
+        .student-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .student-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f7fafc;
+            gap: 15px;
+        }
+
+        .student-info h3 {
+            color: #2d3748;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin: 0 0 5px 0;
+        }
+
+        .student-meta {
+            color: #718096;
+            font-size: 0.9rem;
+            margin: 2px 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .info-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .info-badge:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        .badge-nisn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .badge-nis {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .badge-gender {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .badge-class {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .badge-walas {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+
+        .badge-icon {
+            font-size: 0.8rem;
+        }
+
+        .student-number {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .achievement-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .achievement-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .achievement-percentage {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+            transition: all 0.3s ease;
+            min-width: 60px;
+            text-align: center;
+        }
+
+        .achievement-percentage.medium {
+            background: linear-gradient(135deg, #ed8936 0%, #dd6b20 100%);
+            box-shadow: 0 4px 15px rgba(237, 137, 54, 0.3);
+        }
+
+        .achievement-percentage.low {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+        }
+
+        .achievement-percentage:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
+        }
+
+        .achievement-percentage.medium:hover {
+            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
+        }
+
+        .achievement-percentage.low:hover {
+            box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
+        }
+
+        .achievement-label-small {
+            font-size: 0.75rem;
+            color: #718096;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .scores-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .score-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 12px;
+            padding: 10px 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+            cursor: pointer;
+            transform: translateY(0);
+        }
+
+        .score-badge.ok {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
+        }
+
+        .score-badge.empty {
+            background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
+            box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
+        }
+
+        .score-badge:hover {
+            transform: translateY(-3px);
+        }
+
+        .score-badge.ok:hover {
+            background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
+            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+        }
+
+        .score-badge.empty:hover {
+            background: linear-gradient(135deg, #c53030 0%, #9c2626 100%);
+            box-shadow: 0 8px 25px rgba(229, 62, 62, 0.4);
+        }
+
+        .score-badge:not(.ok):not(.empty):hover {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+        }
+
+        .score-label {
+            font-size: 0.7rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+            margin-bottom: 3px;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        }
+
+        .score-value {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+
+
+        .no-data {
+            text-align: center;
+            padding: 50px;
+            color: white;
+            font-size: 18px;
+        }
+
+        .info-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .info-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+        }
+
+        .info-header h3 {
+            color: #2d3748;
+            font-size: 1.5rem;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .close-btn {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #c53030;
+            transform: scale(1.1);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .info-item {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            background: #edf2f7;
+            transform: translateX(5px);
+        }
+
+        .info-item strong {
+            color: #667eea;
+            font-weight: 600;
+            display: inline-block;
+            min-width: 80px;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.8rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .search-box {
+                min-width: auto;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .data-container {
+                grid-template-columns: 1fr;
+            }
+
+            .student-card {
+                padding: 20px;
+            }
+
+            .scores-grid {
+                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+                gap: 6px;
+            }
+
+            .score-badge {
+                padding: 6px 4px;
+            }
+
+            .score-label {
+                font-size: 0.6rem;
+            }
+
+            .score-value {
+                font-size: 0.8rem;
+            }
+
+            .achievement-display {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 5px;
+            }
+
+            .achievement-percentage {
+                font-size: 1.2rem;
+                padding: 10px 16px;
+                min-width: 70px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .info-item strong {
+                min-width: 70px;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <header class="header">
+    <h1 class="title">Nilai PA ACH Kelas XII</h1>
+    <p class="subtitle">Sistem Monitoring Nilai dan Progress Siswa</p>
+   </header>
+   <div class="controls">
+    <div class="search-box"><input type="text" id="searchInput" placeholder="Cari nama siswa atau NISN..."> <button id="searchBtn" class="search-btn"> <span>🔍</span> Cari </button>
+    </div><select id="classFilter" class="filter-select"> <option value="">Semua Kelas</option> </select> <select id="walasFilter" class="filter-select"> <option value="">Semua Wali Kelas</option> </select> <button id="refreshBtn" class="refresh-btn"> <span>🔄</span> Refresh Data </button> <button id="infoBtn" class="refresh-btn" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);"> <span>ℹ️</span> Keterangan </button>
+   </div>
+   <div class="info-panel" id="infoPanel" style="display: none;">
+    <div class="info-header">
+     <h3>Keterangan Kolom</h3><button id="closeInfo" class="close-btn">×</button>
+    </div>
+    <div class="info-grid">
+     <div class="info-item"><strong>M-K:</strong> Tugas Makalah
+     </div>
+     <div class="info-item"><strong>M-U:</strong> Upload Makalah
+     </div>
+     <div class="info-item"><strong>M-I TES:</strong> Tes Individu
+     </div>
+     <div class="info-item"><strong>C1 BK1:</strong> Catatan Elemen BK1
+     </div>
+     <div class="info-item"><strong>C2 BAB1:</strong> Catatan Bab 1 Informatika
+     </div>
+     <div class="info-item"><strong>C3 SK:</strong> Catatan Bab 2 SK
+     </div>
+     <div class="info-item"><strong>P-A1:</strong> Projek Arduino 1 Jalur
+     </div>
+     <div class="info-item"><strong>C4 A1:</strong> Kode Arduino 1 Jalur
+     </div>
+     <div class="info-item"><strong>P-A2:</strong> Projek Arduino 4 Jalur
+     </div>
+     <div class="info-item"><strong>C5 A2:</strong> Kode Arduino 4 Jalur
+     </div>
+     <div class="info-item"><strong>P-A3:</strong> Projek Arduino Lagu
+     </div>
+     <div class="info-item"><strong>C5 A3:</strong> Kode Arduino Lagu
+     </div>
+     <div class="info-item"><strong>C6 JKI:</strong> Catatan JKI 2 Gedung
+     </div>
+     <div class="info-item"><strong>P-JKI:</strong> Projek JKI 2 Gedung
+     </div>
+     <div class="info-item"><strong>ACHIEVE:</strong> Persentasi Tugas
+     </div>
+     <div class="info-item"><strong>PROGRESS:</strong> Persentasi Bar
+     </div>
+    </div>
+   </div>
+   <div id="loadingIndicator" class="loading">
+    Memuat data dari Google Spreadsheet...
+   </div>
+   <div class="data-container" id="dataContainer" style="display: none;">
+   </div>
+   <div id="noDataMessage" class="no-data" style="display: none;">
+    <p>Tidak ada data yang ditemukan.</p>
+    <p>Pastikan Google Apps Script sudah dikonfigurasi dengan benar.</p>
+   </div>
+  </div>
+  <script>
+        let allData = [];
+        let filteredData = [];
+
+        // URL Google Apps Script Web App
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxIWQyfirMGMn6z5Zt9zM58JMKVwILFX_EPbqt_tq7FDn5cki5q2NOOCRaq3m3gw5k/exec';
+
+        // Inisialisasi aplikasi
+        document.addEventListener('DOMContentLoaded', function() {
+            loadData();
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            document.getElementById('searchInput').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    filterData();
+                }
+            });
+            document.getElementById('searchBtn').addEventListener('click', filterData);
+            document.getElementById('classFilter').addEventListener('change', filterData);
+            document.getElementById('walasFilter').addEventListener('change', filterData);
+            document.getElementById('refreshBtn').addEventListener('click', loadData);
+            document.getElementById('infoBtn').addEventListener('click', toggleInfoPanel);
+            document.getElementById('closeInfo').addEventListener('click', hideInfoPanel);
+        }
+
+        function toggleInfoPanel() {
+            const infoPanel = document.getElementById('infoPanel');
+            if (infoPanel.style.display === 'none') {
+                infoPanel.style.display = 'block';
+            } else {
+                infoPanel.style.display = 'none';
+            }
+        }
+
+        function hideInfoPanel() {
+            document.getElementById('infoPanel').style.display = 'none';
+        }
+
+        async function loadData() {
+            const loadingIndicator = document.getElementById('loadingIndicator');
+            const dataContainer = document.getElementById('dataContainer');
+            const noDataMessage = document.getElementById('noDataMessage');
+
+            loadingIndicator.style.display = 'block';
+            dataContainer.style.display = 'none';
+            noDataMessage.style.display = 'none';
+
+            try {
+                const response = await fetch(SCRIPT_URL);
+                const data = await response.json();
+                
+                if (data.success && data.data.length > 0) {
+                    allData = data.data;
+                    filteredData = []; // Mulai dengan data kosong
+                    populateFilters();
+                    displayData(); // Tampilkan pesan untuk melakukan pencarian
+                    loadingIndicator.style.display = 'none';
+                    dataContainer.style.display = 'block';
+                } else {
+                    throw new Error('No data received');
+                }
+            } catch (error) {
+                console.error('Error loading data:', error);
+                loadingIndicator.style.display = 'none';
+                noDataMessage.style.display = 'block';
+            }
+        }
+
+        function populateFilters() {
+            const classFilter = document.getElementById('classFilter');
+            const walasFilter = document.getElementById('walasFilter');
+
+            // Reset filters
+            classFilter.innerHTML = '<option value="">Semua Kelas</option>';
+            walasFilter.innerHTML = '<option value="">Semua Wali Kelas</option>';
+
+            // Get unique values
+            const classes = [...new Set(allData.map(row => row[4]).filter(Boolean))];
+            const walas = [...new Set(allData.map(row => row[5]).filter(Boolean))];
+
+            // Populate class filter
+            classes.sort().forEach(cls => {
+                const option = document.createElement('option');
+                option.value = cls;
+                option.textContent = cls;
+                classFilter.appendChild(option);
+            });
+
+            // Populate walas filter
+            walas.sort().forEach(wala => {
+                const option = document.createElement('option');
+                option.value = wala;
+                option.textContent = wala;
+                walasFilter.appendChild(option);
+            });
+        }
+
+        function filterData() {
+            console.log('Filter function called'); // Debug log
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+            const classFilter = document.getElementById('classFilter').value;
+            const walasFilter = document.getElementById('walasFilter').value;
+
+            console.log('Search term:', searchTerm); // Debug log
+            console.log('All data length:', allData.length); // Debug log
+
+            // Jika tidak ada filter apapun, kosongkan data
+            if (!searchTerm && !classFilter && !walasFilter) {
+                filteredData = [];
+            } else {
+                filteredData = allData.filter(row => {
+                    let matchesSearch = true;
+                    let matchesClass = true;
+                    let matchesWalas = true;
+
+                    // Filter pencarian - hanya jika ada input pencarian
+                    if (searchTerm) {
+                        const name = row[0] ? row[0].toString().toLowerCase() : '';
+                        const nisn = row[1] ? row[1].toString().toLowerCase() : '';
+                        matchesSearch = name.includes(searchTerm) || nisn.includes(searchTerm);
+                    }
+                    
+                    // Filter kelas - hanya jika dipilih
+                    if (classFilter) {
+                        matchesClass = row[4] === classFilter;
+                    }
+                    
+                    // Filter wali kelas - hanya jika dipilih
+                    if (walasFilter) {
+                        matchesWalas = row[5] === walasFilter;
+                    }
+
+                    return matchesSearch && matchesClass && matchesWalas;
+                });
+            }
+
+            console.log('Filtered data length:', filteredData.length); // Debug log
+            displayData();
+        }
+
+        function displayData() {
+            const dataContainer = document.getElementById('dataContainer');
+            dataContainer.innerHTML = '';
+
+            if (filteredData.length === 0) {
+                const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+                const classFilter = document.getElementById('classFilter').value;
+                const walasFilter = document.getElementById('walasFilter').value;
+                
+                if (!searchTerm && !classFilter && !walasFilter) {
+                    dataContainer.innerHTML = '<div class="no-data"><p>🔍 Gunakan fitur pencarian untuk menampilkan data siswa</p><p>Masukkan nama atau NISN siswa, atau pilih filter kelas/wali kelas</p></div>';
+                } else {
+                    dataContainer.innerHTML = '<div class="no-data">Tidak ada data yang ditemukan berdasarkan pencarian.</div>';
+                }
+                return;
+            }
+
+            filteredData.forEach((row, index) => {
+                const card = document.createElement('div');
+                card.className = 'student-card';
+                
+                const scoreLabels = ['M-K', 'M-U', 'M-I TES', 'C1 BK1', 'C2 BAB1', 'C3 SK', 'P-A1', 'C4 A1', 'P-A2', 'C5 A2', 'P-A3', 'C5 A3', 'C6 JKI', 'P-JKI'];
+                
+                card.innerHTML = `
+                    <div class="student-header">
+                        <div class="student-number">${index + 1}</div>
+                        <div class="student-info">
+                            <h3>${row[0] || 'Nama Tidak Tersedia'}</h3>
+                            <div class="student-meta">
+                                <div class="info-badge badge-nisn">
+                                    <span class="badge-icon">🆔</span>
+                                    NISN: ${row[1] || '-'}
+                                </div>
+                                <div class="info-badge badge-nis">
+                                    <span class="badge-icon">📋</span>
+                                    NIS: ${row[2] || '-'}
+                                </div>
+                            </div>
+                            <div class="student-meta">
+                                <div class="info-badge badge-gender">
+                                    <span class="badge-icon">${row[3] === 'L' ? '👨' : row[3] === 'P' ? '👩' : '👤'}</span>
+                                    ${row[3] || '-'}
+                                </div>
+                                <div class="info-badge badge-class">
+                                    <span class="badge-icon">🏫</span>
+                                    ${row[4] || '-'}
+                                </div>
+                                <div class="info-badge badge-walas">
+                                    <span class="badge-icon">👨‍🏫</span>
+                                    ${row[5] || '-'}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="achievement-section">
+                            <div class="achievement-display">
+                                <div class="achievement-label-small">Achievement</div>
+                                <div class="achievement-percentage ${getAchievementPercentageClass(row[20])}">${Math.round((parseFloat(row[20]) * 100)) || 0}%</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="scores-grid">
+                        ${scoreLabels.map((label, i) => {
+                            const value = row[6 + i] || '-';
+                            let badgeClass = '';
+                            if (value === 'OK') {
+                                badgeClass = 'ok';
+                            } else if (value === '-' || value === '' || !value) {
+                                badgeClass = 'empty';
+                            }
+                            return `
+                                <div class="score-badge ${badgeClass}">
+                                    <div class="score-label">${label}</div>
+                                    <div class="score-value">${value}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                `;
+                
+                dataContainer.appendChild(card);
+            });
+        }
+
+        function getAchievementPercentageClass(value) {
+            const score = Math.round((parseFloat(value) * 100)) || 0;
+            if (score >= 80) return 'high';
+            if (score >= 60) return 'medium';
+            return 'low';
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fc8eb185252328',t:'MTc2MDY3MDE0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
