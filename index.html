@@ -29,15 +29,6 @@
             text-align: center;
         }
 
-        .logo {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            display: block;
-            border-radius: 50%;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
         .title {
             color: #2d3748;
             font-size: 2.5rem;
@@ -293,19 +284,6 @@
             box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
         }
 
-        .achievement-percentage:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(72, 187, 120, 0.4);
-        }
-
-        .achievement-percentage.medium:hover {
-            box-shadow: 0 6px 20px rgba(237, 137, 54, 0.4);
-        }
-
-        .achievement-percentage.low:hover {
-            box-shadow: 0 6px 20px rgba(229, 62, 62, 0.4);
-        }
-
         .achievement-label-small {
             font-size: 0.75rem;
             color: #718096;
@@ -321,45 +299,39 @@
             margin-bottom: 20px;
         }
 
+        /* Tampilan Badge Nilai */
         .score-badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             border: none;
             border-radius: 12px;
             padding: 10px 8px;
             text-align: center;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
             cursor: pointer;
             transform: translateY(0);
         }
 
-        .score-badge.ok {
+        /* Hijau Gradien jika ada isi (OK, angka, atau teks nilai) */
+        .score-badge.has-value {
             background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
             box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
         }
 
+        /* Merah Gradien jika kosong ("-", "", atau null) */
         .score-badge.empty {
             background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
             box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
         }
 
-        .score-badge:hover {
-            transform: translateY(-3px);
-        }
-
-        .score-badge.ok:hover {
+        .score-badge.has-value:hover {
             background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
             box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
+            transform: translateY(-3px);
         }
 
         .score-badge.empty:hover {
             background: linear-gradient(135deg, #c53030 0%, #9c2626 100%);
             box-shadow: 0 8px 25px rgba(229, 62, 62, 0.4);
-        }
-
-        .score-badge:not(.ok):not(.empty):hover {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            box-shadow: 0 8px 25px rgba(245, 87, 108, 0.3);
+            transform: translateY(-3px);
         }
 
         .score-label {
@@ -467,69 +439,7 @@
                 transform: translateY(0);
             }
         }
-
-        @media (max-width: 768px) {
-            .title {
-                font-size: 1.8rem;
-            }
-            
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-            
-            .search-box {
-                min-width: auto;
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .data-container {
-                grid-template-columns: 1fr;
-            }
-
-            .student-card {
-                padding: 20px;
-            }
-
-            .scores-grid {
-                grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
-                gap: 6px;
-            }
-
-            .score-badge {
-                padding: 6px 4px;
-            }
-
-            .score-label {
-                font-size: 0.6rem;
-            }
-
-            .score-value {
-                font-size: 0.8rem;
-            }
-
-            .achievement-display {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 5px;
-            }
-
-            .achievement-percentage {
-                font-size: 1.2rem;
-                padding: 10px 16px;
-                min-width: 70px;
-            }
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .info-item strong {
-                min-width: 70px;
-            }
-        }
-    </style>
+  </style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
@@ -581,6 +491,7 @@
     <p>Pastikan Google Apps Script sudah dikonfigurasi dengan benar.</p>
    </div>
   </div>
+
   <script>
         let allData = [];
         let filteredData = [];
@@ -588,7 +499,6 @@
         // URL Google Apps Script Web App Terupdate
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzROX9I8ldlVXB3jGsDtKDUIY8B93sv4b5QJh-6dNWY12Ha-LeZv7KZIbbf-vR8G6-WpQ/exec';
 
-        // Inisialisasi aplikasi
         document.addEventListener('DOMContentLoaded', function() {
             loadData();
             setupEventListeners();
@@ -596,9 +506,7 @@
 
         function setupEventListeners() {
             document.getElementById('searchInput').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    filterData();
-                }
+                if (e.key === 'Enter') filterData();
             });
             document.getElementById('searchBtn').addEventListener('click', filterData);
             document.getElementById('classFilter').addEventListener('change', filterData);
@@ -610,11 +518,7 @@
 
         function toggleInfoPanel() {
             const infoPanel = document.getElementById('infoPanel');
-            if (infoPanel.style.display === 'none') {
-                infoPanel.style.display = 'block';
-            } else {
-                infoPanel.style.display = 'none';
-            }
+            infoPanel.style.display = infoPanel.style.display === 'none' ? 'block' : 'none';
         }
 
         function hideInfoPanel() {
@@ -636,9 +540,9 @@
                 
                 if (data.success && data.data.length > 0) {
                     allData = data.data;
-                    filteredData = []; // Mulai dengan data kosong
+                    filteredData = [];
                     populateFilters();
-                    displayData(); // Tampilkan pesan untuk melakukan pencarian
+                    displayData();
                     loadingIndicator.style.display = 'none';
                     dataContainer.style.display = 'block';
                 } else {
@@ -655,15 +559,12 @@
             const classFilter = document.getElementById('classFilter');
             const walasFilter = document.getElementById('walasFilter');
 
-            // Reset filters
             classFilter.innerHTML = '<option value="">Semua Kelas</option>';
             walasFilter.innerHTML = '<option value="">Semua Wali Kelas</option>';
 
-            // Get unique values
             const classes = [...new Set(allData.map(row => row[4]).filter(Boolean))];
             const walas = [...new Set(allData.map(row => row[5]).filter(Boolean))];
 
-            // Populate class filter
             classes.sort().forEach(cls => {
                 const option = document.createElement('option');
                 option.value = cls;
@@ -671,7 +572,6 @@
                 classFilter.appendChild(option);
             });
 
-            // Populate walas filter
             walas.sort().forEach(wala => {
                 const option = document.createElement('option');
                 option.value = wala;
@@ -685,7 +585,6 @@
             const classFilter = document.getElementById('classFilter').value;
             const walasFilter = document.getElementById('walasFilter').value;
 
-            // Jika tidak ada filter apapun, kosongkan data
             if (!searchTerm && !classFilter && !walasFilter) {
                 filteredData = [];
             } else {
@@ -694,19 +593,16 @@
                     let matchesClass = true;
                     let matchesWalas = true;
 
-                    // Filter pencarian
                     if (searchTerm) {
                         const name = row[0] ? row[0].toString().toLowerCase() : '';
                         const nisn = row[1] ? row[1].toString().toLowerCase() : '';
                         matchesSearch = name.includes(searchTerm) || nisn.includes(searchTerm);
                     }
                     
-                    // Filter kelas
                     if (classFilter) {
                         matchesClass = row[4] === classFilter;
                     }
                     
-                    // Filter wali kelas
                     if (walasFilter) {
                         matchesWalas = row[5] === walasFilter;
                     }
@@ -716,6 +612,28 @@
             }
 
             displayData();
+        }
+
+        // Fungsi parsing nilai Achievement agar terbaca presisi
+        function parseAchievement(val) {
+            if (val === undefined || val === null || val === '') return 0;
+            
+            let strVal = val.toString().trim();
+            
+            // Jika dalam bentuk persentase string (contoh "85%")
+            if (strVal.includes('%')) {
+                return Math.round(parseFloat(strVal.replace('%', ''))) || 0;
+            }
+            
+            let num = parseFloat(strVal);
+            if (isNaN(num)) return 0;
+
+            // Jika dalam bentuk pecahan desimal (contoh 0.85 -> 85%)
+            if (num <= 1 && num > 0) {
+                return Math.round(num * 100);
+            }
+            
+            return Math.round(num);
         }
 
         function displayData() {
@@ -739,8 +657,11 @@
                 const card = document.createElement('div');
                 card.className = 'student-card';
                 
-                const scoreLabels = ['C1 MK', 'P1 MK', 'P2 MK', 'P3 MK', 'TI MK', 'C2 SK', 'P-A1', 'C4 A1', 'P-A2', 'C5 A2', 'P-A3', 'C5 A3', 'C6 JKI PENDING', 'P-JKI PENDING'];
+                const scoreLabels = ['M-K', 'M-U', 'M-I TES', 'C1 BK1', 'C2 BAB1', 'C3 SK', 'P-A1', 'C4 A1', 'P-A2', 'C5 A2', 'P-A3', 'C5 A3', 'C6 JKI PENDING', 'P-JKI PENDING'];
                 
+                // Pembacaan Achievement
+                const achievementVal = parseAchievement(row[20]);
+
                 card.innerHTML = `
                     <div class="student-header">
                         <div class="student-number">${index + 1}</div>
@@ -774,20 +695,21 @@
                         <div class="achievement-section">
                             <div class="achievement-display">
                                 <div class="achievement-label-small">Achievement</div>
-                                <div class="achievement-percentage ${getAchievementPercentageClass(row[20])}">${Math.round((parseFloat(row[20]) * 100)) || 0}%</div>
+                                <div class="achievement-percentage ${getAchievementPercentageClass(achievementVal)}">${achievementVal}%</div>
                             </div>
                         </div>
                     </div>
                     
                     <div class="scores-grid">
                         ${scoreLabels.map((label, i) => {
-                            const value = row[6 + i] || '-';
-                            let badgeClass = '';
-                            if (value === 'OK') {
-                                badgeClass = 'ok';
-                            } else if (value === '-' || value === '' || !value) {
-                                badgeClass = 'empty';
-                            }
+                            const rawValue = row[6 + i];
+                            const value = (rawValue !== undefined && rawValue !== null && rawValue.toString().trim() !== '') ? rawValue : '-';
+                            
+                            // Logika Warna Badge:
+                            // Jika ada isi (selain '-' atau kosong) -> 'has-value' (Hijau Gradien)
+                            // Jika kosong atau '-' -> 'empty' (Merah Gradien)
+                            const badgeClass = (value !== '-' && value !== '') ? 'has-value' : 'empty';
+
                             return `
                                 <div class="score-badge ${badgeClass}">
                                     <div class="score-label">${label}</div>
@@ -802,12 +724,11 @@
             });
         }
 
-        function getAchievementPercentageClass(value) {
-            const score = Math.round((parseFloat(value) * 100)) || 0;
+        function getAchievementPercentageClass(score) {
             if (score >= 80) return 'high';
             if (score >= 60) return 'medium';
             return 'low';
         }
-    </script>
+  </script>
  </body>
 </html>
