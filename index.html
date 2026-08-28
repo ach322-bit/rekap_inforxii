@@ -378,8 +378,6 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
-
-
         .no-data {
             text-align: center;
             padding: 50px;
@@ -532,9 +530,6 @@
             }
         }
     </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
@@ -544,46 +539,36 @@
     <p class="subtitle">Sistem Monitoring Nilai dan Progress Siswa</p>
    </header>
    <div class="controls">
-    <div class="search-box"><input type="text" id="searchInput" placeholder="Cari nama siswa atau NISN..."> <button id="searchBtn" class="search-btn"> <span>🔍</span> Cari </button>
-    </div><select id="classFilter" class="filter-select"> <option value="">Semua Kelas</option> </select> <select id="walasFilter" class="filter-select"> <option value="">Semua Wali Kelas</option> </select> <button id="refreshBtn" class="refresh-btn"> <span>🔄</span> Refresh Data </button> <button id="infoBtn" class="refresh-btn" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);"> <span>ℹ️</span> Keterangan </button>
+    <div class="search-box">
+     <input type="text" id="searchInput" placeholder="Cari nama siswa atau NISN..."> 
+     <button id="searchBtn" class="search-btn"> <span>🔍</span> Cari </button>
+    </div>
+    <select id="classFilter" class="filter-select"> <option value="">Semua Kelas</option> </select> 
+    <select id="walasFilter" class="filter-select"> <option value="">Semua Wali Kelas</option> </select> 
+    <button id="refreshBtn" class="refresh-btn"> <span>🔄</span> Refresh Data </button> 
+    <button id="infoBtn" class="refresh-btn" style="background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);"> <span>ℹ️</span> Keterangan </button>
    </div>
    <div class="info-panel" id="infoPanel" style="display: none;">
     <div class="info-header">
      <h3>Keterangan Kolom</h3><button id="closeInfo" class="close-btn">×</button>
     </div>
     <div class="info-grid">
-     <div class="info-item"><strong>C1 MK:</strong> Catatan Makalah BK1
-     </div>
-     <div class="info-item"><strong>P1 MK:</strong> Progress Struktur Sistematika
-     </div>
-     <div class="info-item"><strong>P2 MK:</strong> Progress Isi Makalah
-     </div>
-     <div class="info-item"><strong>P3 MK:</strong> Finalisasi Makalah
-     </div>
-     <div class="info-item"><strong>TI MK:</strong> Tes Praktek Individu
-     </div>
-     <div class="info-item"><strong>C2 SK:</strong> Catatan Bab 2 SK
-     </div>
-     <div class="info-item"><strong>P-A1:</strong> Projek Arduino 1 Jalur
-     </div>
-     <div class="info-item"><strong>C4 A1:</strong> Kode Arduino 1 Jalur
-     </div>
-     <div class="info-item"><strong>P-A2:</strong> Projek Arduino 4 Jalur
-     </div>
-     <div class="info-item"><strong>C5 A2:</strong> Kode Arduino 4 Jalur
-     </div>
-     <div class="info-item"><strong>P-A3:</strong> Projek Arduino Lagu
-     </div>
-     <div class="info-item"><strong>C5 A3:</strong> Kode Arduino Lagu
-     </div>
-     <div class="info-item"><strong>C6 JKI PENDING:</strong> Catatan JKI 2 Gedung
-     </div>
-     <div class="info-item"><strong>P-JKI PENDING:</strong> Projek JKI 2 Gedung
-     </div>
-     <div class="info-item"><strong>ACHIEVE:</strong> Persentasi Tugas
-     </div>
-     <div class="info-item"><strong>PROGRESS:</strong> Persentasi Bar
-     </div>
+     <div class="info-item"><strong>C1 MK:</strong> Catatan Makalah BK1</div>
+     <div class="info-item"><strong>P1 MK:</strong> Progress Struktur Sistematika</div>
+     <div class="info-item"><strong>P2 MK:</strong> Progress Isi Makalah</div>
+     <div class="info-item"><strong>P3 MK:</strong> Finalisasi Makalah</div>
+     <div class="info-item"><strong>TI MK:</strong> Tes Praktek Individu</div>
+     <div class="info-item"><strong>C2 SK:</strong> Catatan Bab 2 SK</div>
+     <div class="info-item"><strong>P-A1:</strong> Projek Arduino 1 Jalur</div>
+     <div class="info-item"><strong>C4 A1:</strong> Kode Arduino 1 Jalur</div>
+     <div class="info-item"><strong>P-A2:</strong> Projek Arduino 4 Jalur</div>
+     <div class="info-item"><strong>C5 A2:</strong> Kode Arduino 4 Jalur</div>
+     <div class="info-item"><strong>P-A3:</strong> Projek Arduino Lagu</div>
+     <div class="info-item"><strong>C5 A3:</strong> Kode Arduino Lagu</div>
+     <div class="info-item"><strong>C6 JKI PENDING:</strong> Catatan JKI 2 Gedung</div>
+     <div class="info-item"><strong>P-JKI PENDING:</strong> Projek JKI 2 Gedung</div>
+     <div class="info-item"><strong>ACHIEVE:</strong> Persentasi Tugas</div>
+     <div class="info-item"><strong>PROGRESS:</strong> Persentasi Bar</div>
     </div>
    </div>
    <div id="loadingIndicator" class="loading">
@@ -600,9 +585,8 @@
         let allData = [];
         let filteredData = [];
 
-        // URL Google Apps Script Web App
-        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxCHHc3Ut6Wh6QRCMY9gBj7enmPdk18A5zAXMAOx9_aZCSP-86K3DI2WV9ePgshXUfKuw/exec';
-   
+        // URL Google Apps Script Web App Terupdate
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzROX9I8ldlVXB3jGsDtKDUIY8B93sv4b5QJh-6dNWY12Ha-LeZv7KZIbbf-vR8G6-WpQ/exec';
 
         // Inisialisasi aplikasi
         document.addEventListener('DOMContentLoaded', function() {
@@ -697,13 +681,9 @@
         }
 
         function filterData() {
-            console.log('Filter function called'); // Debug log
             const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
             const classFilter = document.getElementById('classFilter').value;
             const walasFilter = document.getElementById('walasFilter').value;
-
-            console.log('Search term:', searchTerm); // Debug log
-            console.log('All data length:', allData.length); // Debug log
 
             // Jika tidak ada filter apapun, kosongkan data
             if (!searchTerm && !classFilter && !walasFilter) {
@@ -714,19 +694,19 @@
                     let matchesClass = true;
                     let matchesWalas = true;
 
-                    // Filter pencarian - hanya jika ada input pencarian
+                    // Filter pencarian
                     if (searchTerm) {
                         const name = row[0] ? row[0].toString().toLowerCase() : '';
                         const nisn = row[1] ? row[1].toString().toLowerCase() : '';
                         matchesSearch = name.includes(searchTerm) || nisn.includes(searchTerm);
                     }
                     
-                    // Filter kelas - hanya jika dipilih
+                    // Filter kelas
                     if (classFilter) {
                         matchesClass = row[4] === classFilter;
                     }
                     
-                    // Filter wali kelas - hanya jika dipilih
+                    // Filter wali kelas
                     if (walasFilter) {
                         matchesWalas = row[5] === walasFilter;
                     }
@@ -735,7 +715,6 @@
                 });
             }
 
-            console.log('Filtered data length:', filteredData.length); // Debug log
             displayData();
         }
 
@@ -830,7 +809,5 @@
             return 'low';
         }
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'98fc8eb185252328',t:'MTc2MDY3MDE0OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-
+ </body>
 </html>
-
