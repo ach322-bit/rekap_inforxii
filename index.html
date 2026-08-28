@@ -209,29 +209,13 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
 
-        .badge-nisn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
+        .badge-nisn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+        .badge-nis { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .badge-gender { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .badge-class { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .badge-walas { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
 
-        .badge-nis {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .badge-gender {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .badge-class {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-
-        .badge-walas {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        }
-
-        .badge-icon {
-            font-size: 0.8rem;
-        }
+        .badge-icon { font-size: 0.8rem; }
 
         .student-number {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -261,17 +245,20 @@
         }
 
         .achievement-percentage {
-            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
             font-size: 1.1rem;
             font-weight: bold;
             text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
             transition: all 0.3s ease;
             min-width: 60px;
             text-align: center;
+        }
+
+        .achievement-percentage.high {
+            background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+            box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
         }
 
         .achievement-percentage.medium {
@@ -299,7 +286,6 @@
             margin-bottom: 20px;
         }
 
-        /* Tampilan Badge Nilai */
         .score-badge {
             border: none;
             border-radius: 12px;
@@ -307,16 +293,15 @@
             text-align: center;
             transition: all 0.3s ease;
             cursor: pointer;
-            transform: translateY(0);
         }
 
-        /* Hijau Gradien jika ada isi (OK, angka, atau teks nilai) */
+        /* Hijau Gradien jika ada isinya */
         .score-badge.has-value {
             background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
             box-shadow: 0 4px 15px rgba(72, 187, 120, 0.3);
         }
 
-        /* Merah Gradien jika kosong ("-", "", atau null) */
+        /* Merah Gradien jika tidak ada isi */
         .score-badge.empty {
             background: linear-gradient(135deg, #e53e3e 0%, #c53030 100%);
             box-shadow: 0 4px 15px rgba(229, 62, 62, 0.3);
@@ -324,13 +309,11 @@
 
         .score-badge.has-value:hover {
             background: linear-gradient(135deg, #38a169 0%, #2f855a 100%);
-            box-shadow: 0 8px 25px rgba(72, 187, 120, 0.4);
             transform: translateY(-3px);
         }
 
         .score-badge.empty:hover {
             background: linear-gradient(135deg, #c53030 0%, #9c2626 100%);
-            box-shadow: 0 8px 25px rgba(229, 62, 62, 0.4);
             transform: translateY(-3px);
         }
 
@@ -340,14 +323,12 @@
             font-weight: 600;
             margin-bottom: 3px;
             text-transform: uppercase;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
         }
 
         .score-value {
             font-size: 0.9rem;
             font-weight: bold;
             color: white;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
         }
 
         .no-data {
@@ -363,7 +344,6 @@
             padding: 25px;
             margin-bottom: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            animation: slideDown 0.3s ease-out;
         }
 
         .info-header {
@@ -375,12 +355,7 @@
             border-bottom: 2px solid #e2e8f0;
         }
 
-        .info-header h3 {
-            color: #2d3748;
-            font-size: 1.5rem;
-            margin: 0;
-            font-weight: 600;
-        }
+        .info-header h3 { color: #2d3748; font-size: 1.5rem; margin: 0; }
 
         .close-btn {
             background: #e53e3e;
@@ -390,17 +365,7 @@
             height: 30px;
             border-radius: 50%;
             font-size: 18px;
-            font-weight: bold;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-        }
-
-        .close-btn:hover {
-            background: #c53030;
-            transform: scale(1.1);
         }
 
         .info-grid {
@@ -414,31 +379,9 @@
             padding: 15px;
             border-radius: 10px;
             border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
         }
 
-        .info-item:hover {
-            background: #edf2f7;
-            transform: translateX(5px);
-        }
-
-        .info-item strong {
-            color: #667eea;
-            font-weight: 600;
-            display: inline-block;
-            min-width: 80px;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        .info-item strong { color: #667eea; display: inline-block; min-width: 80px; }
   </style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
@@ -496,7 +439,6 @@
         let allData = [];
         let filteredData = [];
 
-        // URL Google Apps Script Web App Terupdate
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzROX9I8ldlVXB3jGsDtKDUIY8B93sv4b5QJh-6dNWY12Ha-LeZv7KZIbbf-vR8G6-WpQ/exec';
 
         document.addEventListener('DOMContentLoaded', function() {
@@ -614,26 +556,24 @@
             displayData();
         }
 
-        // Fungsi parsing nilai Achievement agar terbaca presisi
-        function parseAchievement(val) {
-            if (val === undefined || val === null || val === '') return 0;
-            
-            let strVal = val.toString().trim();
-            
-            // Jika dalam bentuk persentase string (contoh "85%")
-            if (strVal.includes('%')) {
-                return Math.round(parseFloat(strVal.replace('%', ''))) || 0;
+        // Fungsi Deteksi & Parsing Nilai Persentase Achievement Otomatis
+        function extractAchievementValue(row) {
+            // Cek posisi umum (indeks 20 dan 20 ke atas)
+            for (let i = row.length - 1; i >= 6; i--) {
+                let val = row[i];
+                if (val !== undefined && val !== null && val !== '') {
+                    let str = val.toString().trim();
+                    if (str.includes('%')) {
+                        return Math.round(parseFloat(str.replace('%', ''))) || 0;
+                    }
+                    let num = parseFloat(str);
+                    if (!isNaN(num)) {
+                        if (num > 0 && num <= 1) return Math.round(num * 100);
+                        if (num > 1 && num <= 100 && i >= 19) return Math.round(num);
+                    }
+                }
             }
-            
-            let num = parseFloat(strVal);
-            if (isNaN(num)) return 0;
-
-            // Jika dalam bentuk pecahan desimal (contoh 0.85 -> 85%)
-            if (num <= 1 && num > 0) {
-                return Math.round(num * 100);
-            }
-            
-            return Math.round(num);
+            return 0;
         }
 
         function displayData() {
@@ -659,8 +599,8 @@
                 
                 const scoreLabels = ['M-K', 'M-U', 'M-I TES', 'C1 BK1', 'C2 BAB1', 'C3 SK', 'P-A1', 'C4 A1', 'P-A2', 'C5 A2', 'P-A3', 'C5 A3', 'C6 JKI PENDING', 'P-JKI PENDING'];
                 
-                // Pembacaan Achievement
-                const achievementVal = parseAchievement(row[20]);
+                // Pembacaan Nilai Persentase Achievement
+                const achievementVal = extractAchievementValue(row);
 
                 card.innerHTML = `
                     <div class="student-header">
@@ -704,10 +644,6 @@
                         ${scoreLabels.map((label, i) => {
                             const rawValue = row[6 + i];
                             const value = (rawValue !== undefined && rawValue !== null && rawValue.toString().trim() !== '') ? rawValue : '-';
-                            
-                            // Logika Warna Badge:
-                            // Jika ada isi (selain '-' atau kosong) -> 'has-value' (Hijau Gradien)
-                            // Jika kosong atau '-' -> 'empty' (Merah Gradien)
                             const badgeClass = (value !== '-' && value !== '') ? 'has-value' : 'empty';
 
                             return `
@@ -726,7 +662,7 @@
 
         function getAchievementPercentageClass(score) {
             if (score >= 80) return 'high';
-            if (score >= 60) return 'medium';
+            if (score >= 50) return 'medium';
             return 'low';
         }
   </script>
